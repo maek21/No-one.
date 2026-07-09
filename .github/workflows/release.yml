@@ -1,0 +1,103 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            electron-target: --win
+            artifact-name: No-one-Setup-${{ github.ref_name }}.exe
+            artifact-path: release/*.exe
+
+          - os: macos-latest
+            electron-target: --mac
+            artifact-name: No-one-${{ github.ref_name }}.dmg
+            artifact-path: release/*.dmg
+
+          - os: ubuntu-latest
+            electron-target: --linux deb
+            artifact-name: No-one-${{ github.ref_name }}.deb
+            artifact-path: release/*.deb
+
+    runs-on: ${{ matrix.os }}
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install system deps (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ruby ruby-dev upx-ucl
+          sudo gem install fpm --no-document
+
+      - name: Install system deps (macOS)
+        if: matrix.os == 'macos-latest'
+        run: brew install upx
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+          pip install pyinstaller
+
+      - name: Build backend (PyInstaller)
+        run: |
+          cd backend
+          python -m PyInstaller build.spec --clean -y
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Build Electron package
+        run: npx electron-builder ${{ matrix.electron-target }}
+        env:
+          CSC_LINK: ""
+          CSC_KEY_PASSWORD: ""
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: No-one-${{ matrix.os }}-${{ github.ref_name }}
+          path: ${{ matrix.artifact-path }}
+          if-no-files-found: error
