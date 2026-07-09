@@ -31,11 +31,12 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: noone
 
     steps:
       - uses: actions/checkout@v4
-
-      - run: echo "workspace=${{ github.workspace }}" && ls -la
+        with:
+          path: noone
 
       - name: Install system deps (Linux)
         if: matrix.os == 'ubuntu-latest'
@@ -51,8 +52,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: pip
-          cache-dependency-path: backend/requirements.txt
 
       - uses: actions/setup-node@v4
         with:
@@ -86,10 +85,7 @@ jobs:
           CSC_KEY_PASSWORD: ""
           CSC_IDENTITY_AUTO_DISCOVERY: false
 
-      - run: ls -la release/ && echo "artifact_path=${{ matrix.artifact-path }}"
-
       - uses: actions/upload-artifact@v4
         with:
           name: No-one-${{ matrix.os }}-${{ github.ref_name }}
-          path: |
-            ${{ matrix.artifact-path }}
+          path: ${{ matrix.artifact-path }}
