@@ -1,0 +1,76 @@
+{
+  "name": "no-one",
+  "version": "0.1.0",
+  "private": true,
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "concurrently -n be,fe \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && python main.py",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:electron": "concurrently -n be,fe,el \"npm run dev:backend\" \"npm run dev:frontend\" \"wait-on http://localhost:5174 && electron .\"",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && pyinstaller build.spec --clean -y",
+    "build": "npm run build:frontend && npm run build:backend",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "dist:all": "npm run build && electron-builder --win --mac --linux"
+  },
+  "build": {
+    "appId": "com.no-one.music",
+    "productName": "No-one.",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "frontend/dist/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "backend/dist/no-one-backend",
+        "to": "backend",
+        "filter": ["**/*"]
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "build/icon.png",
+      "category": "public.app-category.music"
+    },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "icon": "build/icon.png",
+      "category": "Audio"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "No-one.",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico"
+    },
+    "dmg": {
+      "title": "No-one.",
+      "icon": "build/icon.png",
+      "contents": [
+        { "x": 130, "y": 220, "type": "file" },
+        { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+      ]
+    }
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "electron": "^43.1.0",
+    "electron-builder": "^26.15.3",
+    "wait-on": "^9.0.10"
+  }
+}

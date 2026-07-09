@@ -1,0 +1,87 @@
+.library {
+  width: 100%;
+  height: 100%;
+  padding: var(--spacing-xl);
+  overflow-y: auto;
+}
+
+.library-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.library-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.library-header h1 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: var(--spacing-md);
+}
+
+.library-stats {
+  display: flex;
+  gap: var(--spacing-lg);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--spacing-lg);
+  padding-bottom: var(--spacing-xl);
+}
+
+.album-card {
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.album-card:hover {
+  transform: scale(1.02);
+}
+
+.album-artwork {
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: var(--spacing-sm);
+}
+
+.album-artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.album-artwork-placeholder {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.album-info {
+  padding: var(--spacing-xs);
+}
+
+.album-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.album-artist {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

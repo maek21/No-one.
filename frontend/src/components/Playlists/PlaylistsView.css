@@ -1,0 +1,166 @@
+.playlists-view {
+  padding: 24px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.playlists-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.playlists-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+.playlists-add-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.playlists-add-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.playlists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.playlist-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.playlist-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.playlist-card-art {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  position: relative;
+}
+
+.playlist-card-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.playlist-play-btn {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s, transform 0.15s;
+  transform: translateY(2px);
+}
+
+.playlist-card:hover .playlist-play-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.playlist-play-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.05);
+}
+
+.playlist-card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.playlist-card-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playlist-card-count {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 2px;
+}
+
+.playlists-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 8px;
+}
+
+.playlists-empty-title {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.playlists-empty-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.15);
+}
+
+.playlists-create-btn {
+  margin-top: 12px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.playlists-create-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}

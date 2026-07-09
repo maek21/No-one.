@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+dist/
+*.log
+
+# Electron / build output
+release/
+*.asar
+backend/dist/
+backend/build/
+
+# Design tools
+design-system/
+
+# Other
+prompt.md
+
+# Cache
+backend/cache/
+*.db
+*.db-shm
+*.db-wal
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local

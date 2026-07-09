@@ -1,0 +1,35 @@
+# Core
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+pydantic==2.10.5
+pydantic-settings==2.7.1
+
+# Database
+sqlalchemy==2.0.36
+aiosqlite==0.20.0
+
+# Audio
+mutagen==1.47.0
+av==14.0.1
+
+# Analysis
+librosa==0.10.2
+numpy==2.2.1
+scipy==1.15.1
+scikit-learn==1.6.1
+
+# Image processing
+Pillow==11.1.0
+scikit-image==0.25.0
+
+# File monitoring
+watchdog==6.0.0
+
+# WebSockets
+python-socketio==5.14.1
+websockets==14.1
+
+# Utilities
+python-dotenv==1.0.1
+loguru==0.7.3
