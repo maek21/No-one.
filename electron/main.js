@@ -61,7 +61,7 @@ function waitForBackend(timeout = 15000) {
 }
 
 function createWindow() {
-  const iconPath = path.join(__dirname, '..', 'build', 'icon.png')
+  const iconPath = path.join(__dirname, '..', 'assets', 'icon.png')
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,

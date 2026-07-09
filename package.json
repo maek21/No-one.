@@ -2,6 +2,10 @@
   "name": "no-one",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "maek",
+    "email": "maek@no-one.app"
+  },
   "main": "electron/main.js",
   "scripts": {
     "dev": "concurrently -n be,fe \"npm run dev:backend\" \"npm run dev:frontend\"",
@@ -24,7 +28,8 @@
     },
     "files": [
       "electron/**/*",
-      "frontend/dist/**/*"
+      "frontend/dist/**/*",
+      "assets/**/*"
     ],
     "extraResources": [
       {
@@ -35,7 +40,7 @@
     ],
     "win": {
       "target": "nsis",
-      "icon": "build/icon.ico"
+      "icon": "assets/icon.ico"
     },
     "mac": {
       "target": "dmg",
@@ -54,9 +59,9 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "No-one.",
-      "installerIcon": "build/icon.ico",
-      "uninstallerIcon": "build/icon.ico",
-      "installerHeaderIcon": "build/icon.ico"
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/icon.ico"
     },
     "dmg": {
       "title": "No-one.",
